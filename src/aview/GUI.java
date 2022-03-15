@@ -18,7 +18,6 @@ public class GUI extends JPanel implements MouseListener{
     private JCheckBox boodown = new JCheckBox("Down");
     private JCheckBox booleft = new JCheckBox("Left");
     private JCheckBox booright = new JCheckBox("Right");
-    private boolean teams = true;
     private JLabel teamAnzeige= new JLabel("Rot");
     private ButtonGroup group = new ButtonGroup();
 
@@ -120,6 +119,7 @@ public class GUI extends JPanel implements MouseListener{
         mainframe = new JFrame();
         mainframe.add(this);
         mainframe.pack();
+        mainframe.setLocationRelativeTo(null);
         mainframe.setTitle("Maulwurf Company");
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainframe.setVisible(true);
@@ -503,13 +503,9 @@ public class GUI extends JPanel implements MouseListener{
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println("Entered");
-        
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        System.out.println("Exited");
-        
     }
 }

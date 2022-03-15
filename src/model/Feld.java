@@ -8,7 +8,7 @@ public class Feld {
     private int breite;
     private int hoehe;
     private ArrayList<ArrayList<Integer>> spielbrett;
-    private ArrayList<Loch> löcher;
+    private ArrayList<Loch> löcher = new ArrayList<>();
     
     public Feld(int x, int y) {
         breite = x;
@@ -28,8 +28,7 @@ public class Feld {
         if (tmp[0] > breite || tmp[1] > hoehe) {
             return false;
         }
-        spielbrett.get(tmp[1]).set(tmp[0],2);
-        löcher = new ArrayList<>();
+        spielbrett.get(tmp[1]).set(tmp[0], 2);
         löcher.add(l);
         return true;
     }
@@ -68,7 +67,6 @@ public class Feld {
     }
 
     public boolean check(Maulwurf mw, int schritte, String wahl){
-
         int tmp[] = mw.getPosition();
         switch(wahl) {
             case "up":
@@ -171,7 +169,6 @@ public class Feld {
     }
 
     public boolean moveMaulwurf(Maulwurf mw, int schritte, String wahl) {
-
         if(check(mw,schritte,wahl) == true) {
             int[] tmp = mw.getPosition();
             int[] neuePosi = new int[2];
@@ -216,7 +213,7 @@ public class Feld {
             return false;
         }
     }
-    
+
     public boolean checkEinLoch() {
         for(Loch l : löcher) {
             if(l.belegtStatus() == true) {

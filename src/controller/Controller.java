@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
 
 import model.Feld;
@@ -15,6 +16,8 @@ public class Controller {
     private ArrayList<Integer> schritteRot = new ArrayList<>();
     private ArrayList<Integer> schritteBlau = new ArrayList<>();
 
+    private HashSet<Loch> myLöcher = new HashSet<>();
+
     private Feld f;
 
     public Controller(int x, int y) {
@@ -24,13 +27,19 @@ public class Controller {
 
     public int startTheGame() {
         Random r = new Random();
-        int breite = r.nextInt(f.getBreite());
-        int hoehe = r.nextInt(f.gethoehe());
-        int tmp[] = {breite,hoehe};
-        Loch l = new Loch(tmp);
-        if(f.placeLoch(l) == false ) {
-            System.out.println("Error: Kein Loch wurde platziert !");
+
+        for (int i = 0; i < 2; i++) {
+            int breite = r.nextInt(f.getBreite());
+            int hoehe = r.nextInt(f.gethoehe());
+            int[] tmp = {breite,hoehe};
+            myLöcher.add(new Loch(tmp));
         }
+        for(Loch l : myLöcher) {
+            if (f.placeLoch(l) == false) {
+                System.out.println("Fehler bei der Loch-Erstellung");
+            }
+        }
+        
         placeAllMaulwurf();
         fillSchritteRot();
         fillSchritteBlau();
