@@ -93,7 +93,8 @@ public class Controller {
                 hoehe = r.nextInt(f.gethoehe());
             }
             int[] test = {breite,hoehe};
-            Maulwurf t = new Maulwurf("Rot", i, f, test);
+            Maulwurf t = new Maulwurf("Rot", i, test);
+            f.placeMaulwurf(t);
             teamRot.add(t);
         }
         for (int i = 0; i < 3; i++) {
@@ -106,9 +107,9 @@ public class Controller {
                 hoehe = r.nextInt(f.gethoehe());
             }
             int[] test = {breite,hoehe};
-            Maulwurf t = new Maulwurf("Blau", i, f, test);
+            Maulwurf t = new Maulwurf("Blau", i, test);
+            f.placeMaulwurf(t);
             teamBlau.add(t);
-            System.out.println("Wie viele Blaue werden geprintet ? " + i ); // Muss weg
         }
     }
 

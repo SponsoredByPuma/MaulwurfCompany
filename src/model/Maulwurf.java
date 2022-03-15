@@ -4,17 +4,14 @@ public class Maulwurf {
 
     private String team;
     private int number;
-    private Feld brett;
     private int[] position;
     private boolean movement = true;
     private boolean istAusgewählt = false;
 
-    public Maulwurf(String team, int number, Feld brett, int[] pos) {
+    public Maulwurf(String team, int number, int[] pos) {
         this.team = team;
         this.number = number;
-        this.brett = brett;
         this.position = pos;
-       System.out.println(brett.placeMaulwurf(this));
     }
 
     public void setPosition(int[] neuePos) {
