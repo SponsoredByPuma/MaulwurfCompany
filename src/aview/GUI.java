@@ -30,6 +30,8 @@ public class GUI extends JPanel implements MouseListener{
     private ArrayList<ArrayList<Integer>> spielbrett;
     private Feld f;
 
+    private Maulwurf holyMaulwurf;
+
     private Controller controller;
 
     public GUI(int breite, int hoehe) {
@@ -51,10 +53,10 @@ public class GUI extends JPanel implements MouseListener{
                     }
                     
 
-                    if(teams == true) {
+                    if(teamAnzeige.getText().equals("Rot")) {
                         for(Maulwurf mw : controller.getTeamRot()) {
                             if(mw.getAuswahl() == true) {
-                                controller.move(teams, mw.getNumber(), Integer.parseInt(schritteAnzeige.getText()), wahl);
+                                controller.move(true, mw.getNumber(), Integer.parseInt(schritteAnzeige.getText()), wahl);
                                 mw.setAuswahlfalse();
                                 selected = false;
                             }
@@ -62,15 +64,15 @@ public class GUI extends JPanel implements MouseListener{
                     } else {
                         for (Maulwurf mw : controller.getTeamBlau()) {
                             if(mw.getAuswahl() == true) {
-                                controller.move(teams, mw.getNumber(), Integer.parseInt(schritteAnzeige.getText()), wahl);
+                                controller.move(false, mw.getNumber(), Integer.parseInt(schritteAnzeige.getText()), wahl);
                                 mw.setAuswahlfalse();
                                 selected = false;
                             }
                         }
                     }
                     
-                    teams = !teams;
-                    if(teams) {
+                    
+                    if(teamAnzeige.getText().equals("Blau")) {
                         teamAnzeige.setText("Rot");
                         int tmp2 = controller.getSchrittRot();
                         schritteAnzeige.setText(Integer.toString(tmp2));
@@ -330,26 +332,183 @@ public class GUI extends JPanel implements MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
+
+        ArrayList<Maulwurf> tmpRot = controller.getTeamRot();
+
+        ArrayList<Maulwurf> tmpBlau = controller.getTeamBlau();
+
+        if(teamAnzeige.getText().equals("Rot")) {
+            for(Maulwurf mw : tmpRot) {
+                if(50 + (mw.getPosition()[0] * 100) >= e.getX() - 25 && 50 + (mw.getPosition()[0] * 100) <= e.getX() + 25) { // schaue ob X-Koordinate passt
+                    if(50 + (mw.getPosition()[1] * 100) >= e.getY() - 25 && 50 + (mw.getPosition()[1] * 100) <= e.getY() + 25) { // schaue ob Y-Koordinate passt
+                        holyMaulwurf = mw;
+                    } else {
+
+                    }
+                } else {
+
+                }
+            }
+        } else {
+            for(Maulwurf mw : tmpBlau) {
+                if(50 + (mw.getPosition()[0] * 100) >= e.getX() - 25 && 50 + (mw.getPosition()[0] * 100) <= e.getX() + 25) { // schaue ob X-Koordinate passt
+                    if(50 + (mw.getPosition()[1] * 100) >= e.getY() - 25 && 50 + (mw.getPosition()[1] * 100) <= e.getY() + 25) {
+                        holyMaulwurf = mw;
+                    } else {
+
+                    }
+                } else {
+
+                }
+            }
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-        
+
+        if(selected == true) {
+
+            int tmpSchritte = Integer.parseInt(schritteAnzeige.getText());
+            int xMW = holyMaulwurf.getPosition()[0];
+            int yMW = holyMaulwurf.getPosition()[1];
+
+            int[] posMw = {50 + (xMW * 100), 50 + (yMW * 100)}; // Position vom Maulwurf mit der Anzeige skaliert
+
+            int[] oben = {50 + (xMW * 100), 50 + ((yMW - tmpSchritte) * 100)};
+            int[] unten = {50 + (xMW * 100), 50 + ((yMW + tmpSchritte) * 100)};
+            int[] links = {50 + ((xMW - tmpSchritte) * 100) , 50 + (yMW * 100)};
+            int[] rechts = {50 + ((xMW + tmpSchritte) * 100) , 50 + (yMW * 100)};
+
+            if(e.getX() >= oben[0] - 25 && e.getX() <= oben[0] + 25) { // entweder oben oder unten
+
+                if (e.getY() >= oben[1] - 25 && e.getY() <= oben[1] + 25) { // schaue ob es oben ist 
+                    System.out.println("Nach oben !");
+                    if(holyMaulwurf.getTeam().equals("Rot")) {
+                        controller.move(true, holyMaulwurf.getNumber(), tmpSchritte, "up");
+                        if (controller.checkforVictory() == true) {
+                            paintVictory();
+                        } else {
+                            holyMaulwurf.setAuswahlfalse();
+                            selected = false;
+                            teamAnzeige.setText("Blau");
+                            schritteAnzeige.setText(Integer.toString(controller.getSchritteBlau()));
+                            repaint();
+                        }
+                    } else {
+                        controller.move(false, holyMaulwurf.getNumber(), tmpSchritte, "up");
+                        if (controller.checkforVictory() == true) {
+                            paintVictory();
+                        } else {
+                            holyMaulwurf.setAuswahlfalse();
+                            selected = false;
+                            teamAnzeige.setText("Rot");
+                            schritteAnzeige.setText(Integer.toString(controller.getSchrittRot()));
+                            repaint();
+                        }
+                    }
+
+                } else if (e.getY() >= unten[1] - 25 && e.getY() <= unten[1] + 25) {
+                    System.out.println("Nach Unten !");
+                    if(holyMaulwurf.getTeam().equals("Rot")) {
+                        controller.move(true, holyMaulwurf.getNumber(), tmpSchritte, "down");
+                        if (controller.checkforVictory() == true) {
+                            paintVictory();
+                        } else {
+                            holyMaulwurf.setAuswahlfalse();
+                            selected = false;
+                            teamAnzeige.setText("Blau");
+                            schritteAnzeige.setText(Integer.toString(controller.getSchritteBlau()));
+                            repaint();
+                        }
+                    } else {
+                        controller.move(false, holyMaulwurf.getNumber(), tmpSchritte, "down");
+                        if (controller.checkforVictory() == true) {
+                            paintVictory();
+                        } else {
+                            holyMaulwurf.setAuswahlfalse();
+                            selected = false;
+                            teamAnzeige.setText("Rot");
+                            schritteAnzeige.setText(Integer.toString(controller.getSchrittRot()));
+                            repaint();
+                        }
+                    }
+
+                } else {
+                    System.out.println("Erstmal nichts !");
+                }
+
+            } else if (e.getY() >= rechts[1] - 25 && e.getY() <= rechts[1] + 25) { // links oder rechts
+
+                if (e.getX() >= rechts[0] - 25 && e.getX() <= rechts[0] + 25) { // Rechts
+                    System.out.println("Nach Rechts !");
+
+                    if (teamAnzeige.getText().equals("Rot")) {
+                        controller.move(true,holyMaulwurf.getNumber(), tmpSchritte, "right");
+                        if (controller.checkforVictory() == true) {
+                            paintVictory();
+                        } else {
+                            holyMaulwurf.setAuswahlfalse();
+                            selected = false;
+                            teamAnzeige.setText("Blau");
+                            schritteAnzeige.setText(Integer.toString(controller.getSchritteBlau()));
+                            repaint();
+                        }
+                    } else {
+                        controller.move(false, holyMaulwurf.getNumber(), tmpSchritte, "right");
+                        if(controller.checkforVictory() == true) {
+                            paintVictory();
+                        } else {
+                            holyMaulwurf.setAuswahlfalse();
+                            selected = false;
+                            teamAnzeige.setText("Rot");
+                            schritteAnzeige.setText(Integer.toString(controller.getSchrittRot()));
+                            repaint();
+                        }
+                    }
+                } else if (e.getX() >= links[0] - 25 && e.getX() <= links[0] + 25)  { // links
+                    System.out.println("Nach Links !");
+
+                    if (teamAnzeige.getText().equals("Rot")) {
+                        controller.move(true,holyMaulwurf.getNumber(), tmpSchritte, "left");
+                        if (controller.checkforVictory() == true) {
+                            paintVictory();
+                        } else {
+                            holyMaulwurf.setAuswahlfalse();
+                            selected = false;
+                            teamAnzeige.setText("Blau");
+                            schritteAnzeige.setText(Integer.toString(controller.getSchritteBlau()));
+                            repaint();
+                        }
+                    } else {
+                        controller.move(false, holyMaulwurf.getNumber(), tmpSchritte, "left");
+                        if(controller.checkforVictory() == true) {
+                            paintVictory();
+                        } else {
+                            holyMaulwurf.setAuswahlfalse();
+                            selected = false;
+                            teamAnzeige.setText("Rot");
+                            schritteAnzeige.setText(Integer.toString(controller.getSchrittRot()));
+                            repaint();
+                        }
+                    }
+                } else {
+                    System.out.println("Seitlich nichts !");
+                }
+
+            }
+
+        }
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-
         System.out.println("Entered");
         
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
         System.out.println("Exited");
         
     }
