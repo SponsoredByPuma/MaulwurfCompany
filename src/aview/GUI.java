@@ -195,24 +195,24 @@ public class GUI extends JPanel implements MouseListener{
                                 g2d.drawLine(50 + (tmp.getPosition()[0] * 100) - 15, 50 + (tmp.getPosition()[1] * 100) + 15, 50 + (tmp.getPosition()[0] * 100) + 15, 50 + (tmp.getPosition()[1] * 100) + 15); // oben
                                 g2d.drawLine(50 + (tmp.getPosition()[0] * 100) + 15, 50 + (tmp.getPosition()[1] * 100) - 15, 50 + (tmp.getPosition()[0] * 100) + 15, 50 + (tmp.getPosition()[1] * 100) + 15); // rechts
                                 //--------------------------
-                                if (controller.checkifPossible(false, tmp.getNumber(), Integer.parseInt(schritteAnzeige.getText()), "up")) {
+                                if (controller.checkifPossible(true, tmp.getNumber(), Integer.parseInt(schritteAnzeige.getText()), "up")) {
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) - 15, 50 + ((tmp.getPosition()[1] - Integer.parseInt(schritteAnzeige.getText()))* 100) - 25, 50 + (tmp.getPosition()[0] * 100) - 15, 50 + ((tmp.getPosition()[1] * 100) - 15));
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) + 15, 50 + ((tmp.getPosition()[1] - Integer.parseInt(schritteAnzeige.getText()))* 100) - 25, 50 + (tmp.getPosition()[0] * 100) + 15, 50 + ((tmp.getPosition()[1] * 100) - 15));
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) + 15, 50 + ((tmp.getPosition()[1] - Integer.parseInt(schritteAnzeige.getText()))* 100) - 25, 50 + (tmp.getPosition()[0] * 100) - 15, 50 + ((tmp.getPosition()[1] - Integer.parseInt(schritteAnzeige.getText()))* 100) - 25);
                                 }
-                                if (controller.checkifPossible(false, tmp.getNumber(), Integer.parseInt(schritteAnzeige.getText()), "down")) {
+                                if (controller.checkifPossible(true, tmp.getNumber(), Integer.parseInt(schritteAnzeige.getText()), "down")) {
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) - 15, 50 + ((tmp.getPosition()[1] + Integer.parseInt(schritteAnzeige.getText()))* 100) + 25, 50 + (tmp.getPosition()[0] * 100) - 15, 50 + ((tmp.getPosition()[1] * 100) + 15));
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) + 15, 50 + ((tmp.getPosition()[1] + Integer.parseInt(schritteAnzeige.getText()))* 100) + 25, 50 + (tmp.getPosition()[0] * 100) + 15, 50 + ((tmp.getPosition()[1] * 100) + 15));
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) + 15, 50 + ((tmp.getPosition()[1] + Integer.parseInt(schritteAnzeige.getText()))* 100) + 25, 50 + (tmp.getPosition()[0] * 100) - 15, 50 + ((tmp.getPosition()[1] + Integer.parseInt(schritteAnzeige.getText()))* 100) +25);
                                 }
         
-                                if (controller.checkifPossible(false, tmp.getNumber(), Integer.parseInt(schritteAnzeige.getText()), "left")) {
+                                if (controller.checkifPossible(true, tmp.getNumber(), Integer.parseInt(schritteAnzeige.getText()), "left")) {
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) - 15, 50 + (tmp.getPosition()[1] * 100) + 15, 50 + ((tmp.getPosition()[0] - Integer.parseInt(schritteAnzeige.getText()) )* 100)- 15, 50 + ((tmp.getPosition()[1] * 100) + 15));
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) - 15, 50 + (tmp.getPosition()[1] * 100) - 15, 50 + ((tmp.getPosition()[0] - Integer.parseInt(schritteAnzeige.getText()) )* 100)- 15, 50 + ((tmp.getPosition()[1] * 100) - 15));
                                     g2d.drawLine(50 + ((tmp.getPosition()[0] - Integer.parseInt(schritteAnzeige.getText()) )* 100)- 15, 50 + (tmp.getPosition()[1] * 100) - 15, 50 + ((tmp.getPosition()[0] - Integer.parseInt(schritteAnzeige.getText()) )* 100) - 15, 50 + ((tmp.getPosition()[1] * 100) + 15));
                                 }
         
-                                if (controller.checkifPossible(false, tmp.getNumber(), Integer.parseInt(schritteAnzeige.getText()), "right")) {
+                                if (controller.checkifPossible(true, tmp.getNumber(), Integer.parseInt(schritteAnzeige.getText()), "right")) {
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) + 15, 50 + (tmp.getPosition()[1] * 100) + 15, 50 + ((tmp.getPosition()[0] + Integer.parseInt(schritteAnzeige.getText()) )* 100) + 15, 50 + ((tmp.getPosition()[1] * 100) + 15));
                                     g2d.drawLine(50 + (tmp.getPosition()[0] * 100) + 15, 50 + (tmp.getPosition()[1] * 100) - 15, 50 + ((tmp.getPosition()[0] + Integer.parseInt(schritteAnzeige.getText()) )* 100) + 15, 50 + ((tmp.getPosition()[1] * 100) - 15));
                                     g2d.drawLine(50 + ((tmp.getPosition()[0] + Integer.parseInt(schritteAnzeige.getText()) ) * 100) + 15, 50 + (tmp.getPosition()[1] * 100) - 15, 50 + ((tmp.getPosition()[0] + Integer.parseInt(schritteAnzeige.getText()) )* 100) + 15, 50 + ((tmp.getPosition()[1] * 100) + 15));
