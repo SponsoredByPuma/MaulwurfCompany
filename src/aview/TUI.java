@@ -11,11 +11,10 @@ public class TUI {
     public TUI() {
         int breite = Integer.parseInt(JOptionPane.showInputDialog(null, "Wie breit soll das Feld sein ?"));
         int hoehe = Integer.parseInt(JOptionPane.showInputDialog(null, "Wie hoch soll das Feld sein ?"));
-        Controller c = new Controller(breite,hoehe);
+        new Controller(breite,hoehe);
 
         Scanner sc = new Scanner(System.in);
         String choice = "";
-        Boolean tr = false;
 
         while(! choice.equals("quit")) {
 
@@ -30,6 +29,7 @@ public class TUI {
             }
 
         }
+        sc.close();
 
     }
 }

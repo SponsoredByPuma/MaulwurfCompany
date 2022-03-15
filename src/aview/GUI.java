@@ -1,6 +1,5 @@
 package aview;
 
-import javax.sql.rowset.spi.SyncResolver;
 import javax.swing.*;
 
 import controller.*;
@@ -22,6 +21,8 @@ public class GUI extends JPanel implements MouseListener{
     private boolean teams = true;
     private JLabel teamAnzeige= new JLabel("Rot");
     private ButtonGroup group = new ButtonGroup();
+
+    private JFrame mainframe;
 
     private boolean selected = false;
     private String wahl = "";
@@ -114,11 +115,11 @@ public class GUI extends JPanel implements MouseListener{
         f = controller.getSpielBrett();
 
         this.setPreferredSize(new Dimension(1000,1000));
-        JFrame mainframe = new JFrame();
+        mainframe = new JFrame();
         mainframe.add(this);
         mainframe.pack();
         mainframe.setTitle("Maulwurf Company");
-        mainframe.setDefaultCloseOperation(mainframe.EXIT_ON_CLOSE);
+        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainframe.setVisible(true);
 
     }
@@ -282,7 +283,8 @@ public class GUI extends JPanel implements MouseListener{
         if(tmp == 1){
             System.exit(0);
         }else {
-            GUI g = new GUI(controller.getSpielBrett().getBreite(),controller.getSpielBrett().gethoehe());
+            mainframe.setVisible(false);
+            new GUI(controller.getSpielBrett().getBreite(),controller.getSpielBrett().gethoehe());
         }  
     }
 
