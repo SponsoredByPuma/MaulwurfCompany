@@ -150,19 +150,21 @@ public class Controller {
         return null;
     }
 
-    public void move(Boolean team, int number, int schritte, String wahl) {
+    public boolean move(Boolean team, int number, int schritte, String wahl) {
         if(team) {
             Maulwurf tmp = teamRot.get(number);
             if(tmp.getMovement() == true) {
-                f.moveMaulwurf(tmp, schritte, wahl);
-                checkforVictory();
+                return f.moveMaulwurf(tmp, schritte, wahl);
+                //checkforVictory();
             }
+            return false;
         } else {
             Maulwurf tmp = teamBlau.get(number);
             if(tmp.getMovement() == true) {
-                f.moveMaulwurf(tmp, schritte, wahl);
-                checkforVictory();
+               return f.moveMaulwurf(tmp, schritte, wahl);
+                //checkforVictory();
             }
+            return false;
         }
     }
 
